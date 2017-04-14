@@ -352,21 +352,16 @@ Now click on message, you should see the "coffee" message:
 Cool right?
 Okay, but I need to use this message now.
 
-# IoT Platform
+## IoT Platform
 
 Angular + Loopback admin app to see Sigfox devices and messages.
-
-I used [https://github.com/beeman/loopback-angular-admin](https://github.com/beeman/loopback-angular-admin) as a base project.
-This project does not longer exists and has been replaced with [https://github.com/colmena/colmena-cms](https://github.com/colmena/colmena-cms).
-Thank you [Bram Borggreve](https://github.com/beeman) for the base of the project!
-
-## User guide
 
 ### Try it now with Heroku
 
 Deploy an instance on your Heroku account to play around with it!
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/luisomoreau/iot-platform))
+
 
 An alternative way to get it running at Heroku is to install the [Heroku Toolbelt](https://heroku.com/deploy?template=https://github.com/luisomoreau/iot-platform) and follow these steps:
 
