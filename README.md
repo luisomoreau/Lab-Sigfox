@@ -348,3 +348,181 @@ Click on the device menu and select your device.
 Now click on message, you should see the "coffee" message:
 
 ![Sigfox Backend](screenshots/SigfoxBackend.png)
+
+Cool right?
+Okay, but I need to use this message now.
+
+# IoT Platform
+
+Angular + Loopback admin app to see Sigfox devices and messages.
+
+I used [https://github.com/beeman/loopback-angular-admin](https://github.com/beeman/loopback-angular-admin) as a base project.
+This project does not longer exists and has been replaced with [https://github.com/colmena/colmena-cms](https://github.com/colmena/colmena-cms).
+Thank you [Bram Borggreve](https://github.com/beeman) for the base of the project!
+
+## User guide
+
+### Try it now with Heroku
+
+Deploy an instance on your Heroku account to play around with it!
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+An alternative way to get it running at Heroku is to install the [Heroku Toolbelt](https://heroku.com/deploy?template=https://github.com/luisomoreau/iot-platform) and follow these steps:
+
+```
+git clone https://github.com/luisomoreau/iot-platform.git my-project
+cd my-project
+heroku apps:create my-project
+git push heroku master
+```
+
+If you are not familiar with Heroku, just create an account an follow the procedure:
+
+- Create a new app:
+
+![create app](screenshots/heroku-create-app.png)
+
+- Build app:
+
+![build app](screenshots/heroku-build.png)
+
+- App deployed:
+
+![deployed app](screenshots/heroku-deployed.png)
+
+- Open app and login:
+
+![login](screenshots/app-login.png)
+
+
+### Users
+
+After an installation the following users are created by the server/boot/02-load-users.js script:
+
+- **Admin user**: Email: ```admin@admin.com```, password: ```admin```
+- **Regular user**: Email: ```user@user.com```:, password ```user```
+
+Please note, at this moment there is no difference in permissions for admin users or regular users. Feel free to submit a pull request!
+
+### Usage
+
+Now that you logged in, you should see the following dashboard:
+
+![dashboard](screenshots/dashboard.png)
+
+If you click on the devices view, you will see that for the moment, no device are present:
+
+![devices](screenshots/devices.png)
+
+- Activate your device in Sigfox Backend:
+
+If you are using a Sigfox dev kit, you need to activate it first in Sigfox Backend:
+To activate your dev kit, go to [https://backend.sigfox.com/activate](https://backend.sigfox.com/activate) and choose your provider.
+Depending on your location, pick your country and then fill the device's ID, the PAC number and your details.
+Both ID and PAC number are written on your dev kit or your box.
+Check your emails and log in. Your device will appear in your account.
+Click on its ID and go to messages to check if you received anything.
+For example, I will use a Sens'it:
+
+![activate](screenshots/activate1.png)
+![activate](screenshots/activate2.png)
+![activate](screenshots/activate3.png)
+- Configure a callback:
+
+Go to Device Type and and select your device type:
+
+![device type](screenshots/deviceType1.png)
+
+Click on Callbacks
+
+![device type](screenshots/deviceType2.png)
+
+Click on the small "New" button on the upper right corner:
+
+![custom callback](screenshots/customCallback1.png)
+
+Fill the information as shown in the picture below:
+
+![custom callback](screenshots/customCallback2.png)
+
+Add the URL from your Heroku application:
+
+```
+https://<your-app-name>.herokuapp.com/api/Messages
+```
+
+Replace the method by a "PUT" method and change the content type du "application/json"
+
+Add the following JSON in the body:
+```
+{
+  "time": {time},
+  "data": "{data}",
+  "deviceId": "{device}",
+  "RSSI": {rssi},
+  "seqNumber":{seqNumber}
+}
+```
+
+Validate the custom callback.
+
+You should see the following information in the callback view:
+
+![callback](screenshots/callback.png)
+
+Now click on Device on the top menu and select your device.
+Click on the message tab:
+
+![no message](screenshots/messageNoMessages.png)
+
+Send a message with your device (here a sensit, double click on the button for example):
+
+![messages](screenshots/messagesBackend.png)
+
+Go back to your application and on the dashboard, you should see:
+
+![dashboard filled](screenshots/dashboardFilled.png)
+
+You will see that your device has been created automatically.
+
+![device received](screenshots/devicesReceived.png)
+
+Now we will edit the device to associate the Sensit parser. Click on the small pen under the action column:
+
+![device update](screenshots/devicesUpdate.png)
+
+Save your change:
+
+![device updated](screenshots/devicesUpdated.png)
+
+You now can see your parsed messages:
+
+![messages](screenshots/messagesWithParsedData.png)
+
+### Add Sigfox Geolocalisation service:
+
+If you wish to see the Sigfox Geolocation, go back back to Sigfox backend. You will need to create a new callback as the following:
+
+![callback spotit](screenshots/callbackSpotit.png)
+
+The URL pattern is like:
+```
+http://<your-app-name>.herokuapp.com/api/Messages/update?where[time]={time}&where[deviceId]={device}
+```
+
+Select a "POST" HTTP method and the body:
+
+```
+{
+"spotit":{
+  "lat": {lat},
+  "long":{lng},
+  "precision": {radius}
+  }
+}
+```
+
+Then a second callback will update your message and the results will be like this if a result is available:
+
+![spotit map](screenshots/spotitMap.png)
