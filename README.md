@@ -360,7 +360,7 @@ Angular + Loopback admin app to see Sigfox devices and messages.
 
 Deploy an instance on your Heroku account to play around with it!
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/luisomoreau/iot-platform))
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/luisomoreau/iot-platform)
 
 
 An alternative way to get it running at Heroku is to install the [Heroku Toolbelt](https://heroku.com/deploy?template=https://github.com/luisomoreau/iot-platform) and follow these steps:
@@ -410,19 +410,6 @@ If you click on the devices view, you will see that for the moment, no device ar
 
 ![devices](screenshots/devices.png)
 
-- Activate your device in Sigfox Backend:
-
-If you are using a Sigfox dev kit, you need to activate it first in Sigfox Backend:
-To activate your dev kit, go to [https://backend.sigfox.com/activate](https://backend.sigfox.com/activate) and choose your provider.
-Depending on your location, pick your country and then fill the device's ID, the PAC number and your details.
-Both ID and PAC number are written on your dev kit or your box.
-Check your emails and log in. Your device will appear in your account.
-Click on its ID and go to messages to check if you received anything.
-For example, I will use a Sens'it:
-
-![activate](screenshots/activate1.png)
-![activate](screenshots/activate2.png)
-![activate](screenshots/activate3.png)
 - Configure a callback:
 
 Go to Device Type and and select your device type:
