@@ -1,4 +1,4 @@
-# Lab-Sigfox-4h
+# Lab Sigfox
 
 Lab Sigfox using the BKRWS01 and Arduino boards
 
@@ -17,8 +17,9 @@ The different steps will be:
 * Adding sensors
 * Send and receive your first "Hello World"
 * Send some sensors data
-* Set a callback to save your data in firebase
+* Set a callback to push your data to an external service
 * Visualize your data using an open source app
+* Understand Sigfox Geolocation service
 
 ## Prerequisites
 
