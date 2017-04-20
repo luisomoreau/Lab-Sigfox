@@ -174,6 +174,16 @@ Once your code works, commit your changes and push them to your Github repositor
 ![Wiring](screenshots/connexion_gpio.png)
 Thanks [framboise314](http://www.framboise314.fr/carte-de-prototypage-sigfox-par-snoc/) for this connection schematics!
 
+Arduino UNO:
+
+- Plug the RX from the Wisol module to the pin 11 (we will define it as TX in our code).
+- Plug the TX from the Wisol module to the pin 10 (we will define it as RX in our code).
+
+MKR1000:
+- Plug the RX from the Wisol module to the pin 14.
+- Plug the TX from the Wisol module to the pin 13.
+Some pictures of the wiring are available at [https://github.com/luisomoreau/MKR1000-SNOC](https://github.com/luisomoreau/MKR1000-SNOC)
+
 ![](screenshots/wiring3.jpg)
 
 ![](screenshots/wiring1.jpg)
@@ -184,6 +194,8 @@ Thanks [framboise314](http://www.framboise314.fr/carte-de-prototypage-sigfox-par
 ### Send your first message - Hello World
 
 With Sigfox, "Hello World" is to send a "CAFE" or "C0FFEE" message in hexadecimal.
+
+- For Arduino Uno:
 
 Copy past this code in a new project (or open FirstSigfoxMessage.ino in the repository you've just cloned):
 
@@ -337,6 +349,146 @@ void sendMessage(uint8_t msg[], int size){
   }
 }
 
+```
+
+- For the MKR1000:
+
+```
+/*
+ * Author: Louis Moreau: https://github.com/luisomoreau
+ * Date: 2017/03/03
+ * Description:
+ * This arduino example will show you how to send a Sigfox message
+ * using the wisol module and the MKR1000 (https://yadom.fr/carte-breakout-sfm10r1.html)
+*/
+
+
+//Set to 0 if you don't need to see the messages in the console
+#define DEBUG 1
+
+//Message buffer
+uint8_t msg[12];
+
+// the setup function runs once when you press reset or power the board
+void setup() {
+  // initialize digital pin LED_BUILTIN as an output.
+  pinMode(LED_BUILTIN, OUTPUT);
+  if(DEBUG){
+    Serial.begin(9600);
+  }
+
+  // open Wisol communication
+  Serial1.begin(9600);
+  delay(100);
+  getID();
+  delay(100);
+  getPAC();
+}
+
+// the loop function runs over and over again forever
+void loop() {
+  msg[0]=0xC0;
+  msg[1]=0xFF;
+  msg[2]=0xEE;
+
+  sendMessage(msg, 3);
+
+  // In the ETSI zone, due to the reglementation, an object cannot emit more than 1% of the time hourly
+  // So, 1 hour = 3600 sec
+  // 1% of 3600 sec = 36 sec
+  // A Sigfox message takes 6 seconds to emit
+  // 36 sec / 6 sec = 6 messages per hours -> 1 every 10 minutes
+  delay(10*60*1000);
+}
+
+void blink(){
+  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
+  delay(1000);                       // wait for a second
+  digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
+  delay(1000);    
+}
+
+//Get Sigfox ID
+String getID(){
+  String id = "";
+  char output;
+
+  Serial1.print("AT$I=10\r");
+  while (!Serial1.available()){
+     blink();
+  }
+
+  while(Serial1.available()){
+    output = Serial1.read();
+    id += output;
+    delay(10);
+  }
+
+  if(DEBUG){
+    Serial.println("Sigfox Device ID: ");
+    Serial.println(id);
+  }
+
+  return id;
+}
+
+
+//Get PAC number
+String getPAC(){
+  String pac = "";
+  char output;
+
+  Serial1.print("AT$I=11\r");
+  while (!Serial1.available()){
+     blink();
+  }
+
+  while(Serial1.available()){
+    output = Serial1.read();
+    pac += "X";
+    delay(10);
+  }
+
+  if(DEBUG){
+    Serial.println("PAC number: ");
+    Serial.println(pac);
+  }
+
+  return pac;
+}
+
+
+//Send Sigfox Message
+void sendMessage(uint8_t msg[], int size){
+
+  String status = "";
+  char output;
+
+  Serial1.print("AT$SF=");
+  for(int i= 0;i<size;i++){
+    Serial1.print(String(msg[i], HEX));
+    if(DEBUG){
+      Serial.print("Byte:");
+      Serial.println(msg[i], HEX);
+    }
+  }
+
+  Serial1.print("\r");
+
+  while (!Serial1.available()){
+     blink();
+  }
+  while(Serial1.available()){
+    output = (char)Serial1.read();
+    status += output;
+    delay(10);
+  }
+  if(DEBUG){
+    Serial.println();
+    Serial.print("Status \t");
+    Serial.println(status);
+  }
+}
 ```
 
 You should get this result:
@@ -509,3 +661,17 @@ Select a "POST" HTTP method and the body:
 Then a second callback will update your message and the results will be like this if a result is available:
 
 ![spotit map](screenshots/spotitMap.png)
+
+## Your project
+
+Now create a new project and try to send with Sigfox some sensors data.
+
+Don't forget to push your changes and share your project!
+
+## Additional content
+
+* [Framboise314](http://www.framboise314.fr/carte-de-prototypage-sigfox-par-snoc/)
+
+* [Tutos Instructables](www.instructables.com/member/luisomoreau/)
+
+* [Tutos Hackster](https://www.hackster.io/luisomoreau)
