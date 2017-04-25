@@ -43,6 +43,8 @@ Create or join a team, name the team with your two names (or have fun).
 Go to https://www.arduino.cc/en/main/software and download the Arduino IDE:
 ![Arduino IDE](screenshots/Install-Arduino-IDE.png)
 
+If you are using a MKR1000 board, do the following step, otherwise go directly to step 2.
+
 Go to Tools -> Boards -> Boards Manager
 
 **MKR Boards**
@@ -121,7 +123,7 @@ To show the brightness, you need to open the serial port in the setup() function
 ```
 Serial.begin(9600);
 ```
-To print the result in the console, use:
+To print the result in the console use in the loop() function:
 ```
 Serial.println(brightness);
 ```
@@ -143,16 +145,26 @@ git push
 
 During this step, you will read the analog value of a sensor.
 
-To read the analog value (between 0 and 1023), you need to use the following function:
+First plug a sensor to the board as below:
+
+![analogRead](screenshots/analogRead.png)
+
+Here we use:
+- a 10k‎Ω resistor
+- a photo-resistor sensor.
+
+The photo-resistor sensor is acting as a variable resistor and therefore is modifying the continuous analog output signal. It is this signal that we want to read.
+
+To read the analog value (between 0 and 1023), you need to use the following function in the loop() function:
 
 ```
 int sensorValue = analogRead(A0);
 ```
 
-Then we will convert this value in voltage (from 0 to 5V) and percentage:
+Then we will convert this value in voltage (from 0 to 3.3V) and percentage:
 
 ```
-float voltage = sensorValue * (5.0 / 1023.0);
+float voltage = sensorValue * (3.3 / 1023.0);
 float percentage = map(sensorValue, 0, 1023, 0, 100);
 ```
 
