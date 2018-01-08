@@ -183,6 +183,8 @@ Once your code works, commit your changes and push them to your Github repositor
 
 ## Wiring
 
+Be carefull, use 3.3V to power the Wisol module and not the 5V, otherwise, you may damage the module!!!
+
 ![Wiring](screenshots/connexion_gpio.png)
 Thanks [framboise314](http://www.framboise314.fr/carte-de-prototypage-sigfox-par-snoc/) for this connection schematics!
 
@@ -647,7 +649,20 @@ Send a Sigfox message again with your device and view it on the platform:
 
 ![overview-first-message](screenshots/overview-first-message.png)
 
-The Geolocation information may take up to 10 seconds to arrive. This is the necessary time for all the messages to be received by Sigfox Backend and to process the Geolocation.
+The Geolocation information may take up to 10 seconds to arrive. This is the necessary time for all the messages to be received by Sigfox Backend and to process the Geolocation service.
+
+## Decode Sigfox Payload
+
+As an example, we will make a Sigfox connected plant:
+
+Wire the sensors to the Arduino board as follow (do not remove the Wisol module):
+
+![wire-connected-plant](screenshots/wiring-connected-plant.jpg)
+
+Depending on the Arduino board you have been given, open the ConnectPlant folder under the Workspace directory and copy paste the code to Arduino IDE.
+Compile and upload the code:
+
+![connected-plant-console](screenshots/connected-plant-console.png)
 
 ## Your project
 
