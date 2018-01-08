@@ -126,12 +126,12 @@ void sendMessage(uint8_t msg[], int size){
   Serial1.print("AT$SF=");
   for(int i= 0;i<size;i++){
     if (msg[i] < 16){
-      Serial1.write('0');
+      Serial1.print('0');
     }
     Serial1.print(String(msg[i], HEX));
     if(DEBUG){
       if (msg[i] < 16){
-        Serial.write('0');
+        Serial.print('0');
       }
       Serial.print(String(msg[i], HEX));
     }

@@ -183,7 +183,7 @@ Once your code works, commit your changes and push them to your Github repositor
 
 ## Wiring
 
-Be carefull, use 3.3V to power the Wisol module and not the 5V, otherwise, you may damage the module!!!
+**Be carefull, use 3.3V to power the Wisol module and not the 5V, otherwise, you may damage the module!!!**
 
 ![Wiring](screenshots/connexion_gpio.png)
 Thanks [framboise314](http://www.framboise314.fr/carte-de-prototypage-sigfox-par-snoc/) for this connection schematics!
@@ -663,6 +663,54 @@ Depending on the Arduino board you have been given, open the ConnectPlant folder
 Compile and upload the code:
 
 ![connected-plant-console](screenshots/connected-plant-console.png)
+
+Go back on the platform and add a perser to decode the Sigfox Payload:
+
+![add-parser](screenshots/add-parser.png)
+
+Copy paste the following code into the new parser:
+```
+var payload,
+    light,
+    humidity
+    parsedData = [],
+    obj = {};
+
+// First Byte
+var light = parseInt('0x'+payload.substring(0,2));
+//Second Byte
+
+var humidity = parseInt('0x'+payload.substring(2,4));
+
+// Store objects in parsedData array
+obj = {};
+obj.key = 'light';
+obj.value = light;
+obj.type = 'number';
+obj.unit = '%';
+parsedData.push(obj);
+
+obj = {};
+obj.key = 'humidity';
+obj.value = humidity;
+obj.type = 'number';
+obj.unit = '%';
+parsedData.push(obj);
+
+//console.log(parsedData);
+return parsedData;
+```
+
+Now go to Device and click on edit:
+
+ ![devices-edit](screenshots/devices-edit.png)
+
+ You now can see the decoded payload in the message view or in the overview:
+
+  ![overview-last-message](screenshots/overview-last-message.png)
+
+
+   ![messages](screenshots/messages.png)
 
 ## Your project
 
