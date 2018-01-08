@@ -98,9 +98,9 @@ We will try to run this program:
 
 You now should see the small led switching on and off every second!
 
-### Next Step:
+### Next Step (optional):
 
-The next step is to play with another led intensity and show this intensity in the serial monitor:
+The next step is to play with another led intensity and show this intensity in the serial monitor (debug console):
 ![Serial Monitor brightness](screenshots/SerialMonitorBrightness.png)
 
 Plug the LED into the breadbord and link the LED with the pins 5 and the GND:
@@ -517,21 +517,23 @@ Now click on message, you should see the "coffee" message:
 Cool right?
 Okay, but I need to use this message now.
 
-## IoT Platform
+## Sigfox Platform
 
-Angular + Loopback admin app to see Sigfox devices and messages.
 
-### Try it now with Heroku
+### Option 1: Test with the demo application
+
+[Demo](https://sigfox-platform.thenorthweb.com)
+
+### Option 2: Deploy your own instance with [Heroku](https://heroku.com)
 
 Deploy an instance on your Heroku account to play around with it!
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/luisomoreau/iot-platform)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/luisomoreau/sigfox-platform/tree/v0.1-alpha)
 
-
-An alternative way to get it running at Heroku is to install the [Heroku Toolbelt](https://heroku.com/deploy?template=https://github.com/luisomoreau/iot-platform) and follow these steps:
+An alternative way to get it running at Heroku is to install the [Heroku Toolbelt](https://heroku.com/deploy?template=https://github.com/luisomoreau/sigfox-platform/tree/v0.1-alpha) and follow these steps:
 
 ```
-git clone https://github.com/luisomoreau/iot-platform.git my-project
+git clone https://github.com/luisomoreau/sigfox-platform.git my-project
 cd my-project
 heroku apps:create my-project
 git push heroku master
@@ -539,140 +541,113 @@ git push heroku master
 
 If you are not familiar with Heroku, just create an account an follow the procedure:
 
-- Create a new app:
+1. **Create a new app:**
 
-![create app](screenshots/heroku-create-app.png)
+![create app](screenshots/deploy-1.png)
 
-- Build app:
+2. **Build & deploy app:**
 
-![build app](screenshots/heroku-build.png)
+![build app](screenshots/deploy-2.png)
 
-- App deployed:
+3. **(Optional) Link the application with a MongoDB MLab database (Free):**
 
-![deployed app](screenshots/heroku-deployed.png)
+*Note that if you don't link a database to your application, all the data will be erased every time the application restarts.*
 
-- Open app and login:
+* Go to [https://mlab.com](https://mlab.com/login/) and create an account and login.
 
-![login](screenshots/app-login.png)
+* Create a new MongoDB Deployments:
+
+![mlab-select-service](screenshots/mlab-select-service.png)
+
+* Select your plan:
+
+![mlab-select-plan](screenshots/mlab-select-plan.png)
+
+* Select your region:
+
+![mlab-select-region](screenshots/mlab-select-region.png)
+
+* Create database:
+
+![mlab-create-db](screenshots/mlab-create-db.png)
+
+* Validate:
+
+![mlab-validate](screenshots/mlab-validate.png)
+
+* Create database user:
+
+![mlab-create-user](screenshots/mlab-create-user.png)
+
+* Copy your MongoDB URI :
+
+![mlab-view-user](screenshots/mlab-view-user.png)
+
+* Go back to your Heroku Dashboard and go to the Settings tab:
+
+![heroku-show-env-variables](screenshots/heroku-show-env-variables.png)
+
+* Click on Reveal Config Vars and add your MongoDB URI:
+
+![heroku-add-MONGODB_URI](screenshots/heroku-add-MONGODB_URI.png)
+
+* Restart all dynos:
+
+![heroku-restart-dynos](screenshots/heroku-restart-dynos.png)
 
 
-### Users
+### User guide
 
-After an installation the following users are created by the server/boot/02-load-users.js script:
+- Open app and register:
 
-- **Admin user**: Email: ```admin@admin.com```, password: ```admin```
-- **Regular user**: Email: ```user@user.com```:, password ```user```
+![login](screenshots/login.png)
 
-Please note, at this moment there is no difference in permissions for admin users or regular users. Feel free to submit a pull request!
+![register](screenshots/register.png)
 
-### Usage
+![login-2](screenshots/login-2.png)
 
-Now that you logged in, you should see the following dashboard:
+Note that, the first user to register will be granted an admin role.
+The other users to register will be granted user roles.
 
-![dashboard](screenshots/dashboard.png)
+When you logged in successfully, you will arrive on the overview page. At this stage, it should be empty:
 
-If you click on the devices view, you will see that for the moment, no device are present:
+![overview](screenshots/overview-empty.png)
 
-![devices](screenshots/devices.png)
+Now want to create a callback from the Sigfox Backend to push incoming messages to the platform:
 
-- Configure a callback:
+Navigate to the Connectors tab and create a developer access token:
 
-Go to Device Type and and select your device type:
+![create-access-token](screenshots/create-dev-access-token.png)
 
-![device type](screenshots/deviceType1.png)
+Now go back to the Sigfox Backend and click on the INFORMATION tab of your device:
 
-Click on Callbacks
+![device-info](screenshots/backend-device-info.png)
 
-![device type](screenshots/deviceType2.png)
+Click on the CALLBACKS tab:
 
-Click on the small "New" button on the upper right corner:
+![create-callback](screenshots/backend-view-callbacks.png)
 
-![custom callback](screenshots/customCallback1.png)
+Create a new callback:
 
-Fill the information as shown in the picture below:
+![new-callback](screenshots/new-callback.png)
 
-![custom callback](screenshots/customCallback2.png)
+Copy past the information provided in the platform:
 
-Add the URL from your Heroku application:
+![uplink-callback](screenshots/connector-create-uplink-callback.png)
 
-```
-https://<your-app-name>.herokuapp.com/api/Messages
-```
+![backend-uplink-callback](screenshots/uplink-callback.png)
 
-Replace the method by a "PUT" method and change the content type du "application/json"
+Do the same for the Geolocation callback:
 
-Add the following JSON in the body:
-```
-{
-  "time": {time},
-  "data": "{data}",
-  "deviceId": "{device}",
-  "RSSI": {rssi},
-  "seqNumber":{seqNumber}
-}
-```
+![geoloc-callback](screenshots/connector-create-geoloc-callback.png)
 
-Validate the custom callback.
+![backend-geoloc-callback](screenshots/geoloc-callback.png)
 
-You should see the following information in the callback view:
+Send a Sigfox message again with your device and view it on the platform:
 
-![callback](screenshots/callback.png)
+![overview-first-message](screenshots/overview-first-message.png)
 
-Now click on Device on the top menu and select your device.
-Click on the message tab:
-
-![no message](screenshots/messageNoMessages.png)
-
-Send a message with your device (here a sensit, double click on the button for example):
-
-![messages](screenshots/messagesBackend.png)
-
-Go back to your application and on the dashboard, you should see:
-
-![dashboard filled](screenshots/dashboardFilled.png)
-
-You will see that your device has been created automatically.
-
-![device received](screenshots/devicesReceived.png)
-
-Now we will edit the device to associate the Sensit parser. Click on the small pen under the action column:
-
-![device update](screenshots/devicesUpdate.png)
-
-Save your change:
-
-![device updated](screenshots/devicesUpdated.png)
-
-You now can see your parsed messages:
-
-![messages](screenshots/messagesWithParsedData.png)
-
-### Add Sigfox Geolocalisation service:
-
-If you wish to see the Sigfox Geolocation, go back back to Sigfox backend. You will need to create a new callback as the following:
-
-![callback spotit](screenshots/callbackSpotit.png)
-
-The URL pattern is like:
-```
-http://<your-app-name>.herokuapp.com/api/Messages/update?where[time]={time}&where[deviceId]={device}
-```
-
-Select a "POST" HTTP method and the body:
-
-```
-{
-"spotit":{
-  "lat": {lat},
-  "long":{lng},
-  "precision": {radius}
-  }
-}
-```
-
-Then a second callback will update your message and the results will be like this if a result is available:
-
-![spotit map](screenshots/spotitMap.png)
+The Geolocation information may take up to 10 seconds to arrive. This is the necessary time for all the messages to be received by Sigfox Backend and to process the Geolocation.
 
 ## Your project
 
