@@ -703,14 +703,17 @@ return parsedData;
 
 Now go to Device and click on edit:
 
- ![devices-edit](screenshots/devices-edit.png)
+![devices-edit](screenshots/devices-edit.png)
 
- You now can see the decoded payload in the message view or in the overview:
+You now can see the decoded payload in the message view or in the overview:
 
-  ![overview-last-message](screenshots/overview-last-message.png)
+![overview-last-message](screenshots/overview-last-message.png)
 
+![messages](screenshots/messages.png)
 
-   ![messages](screenshots/messages.png)
+And see the graphs:
+
+![graph](screenshots/graph.png)
 
 ## Your project
 
