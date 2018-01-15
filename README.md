@@ -98,49 +98,6 @@ We will try to run this program:
 
 You now should see the small led switching on and off every second!
 
-### Next Step (optional):
-
-The next step is to play with another led intensity and show this intensity in the serial monitor (debug console):
-![Serial Monitor brightness](screenshots/SerialMonitorBrightness.png)
-
-Plug the LED into the breadbord and link the LED with the pins 5 and the GND:
-![Wiring 1](screenshots/wiring1.jpeg)
-
-We will need to use the ```analogWrite(PIN, brightness)``` function where the brightness is between 0 and 255.
-
-Note:
-
-```
- The analogWrite() function uses PWM, so if
- you want to change the pin you're using, be
- sure to use another PWM capable pin. On most
- Arduino, the PWM pins are identified with
- a "~" sign, like ~3, ~5, ~6, ~9, ~10 and ~11.
-
-```
-
-To show the brightness, you need to open the serial port in the setup() function:
-```
-Serial.begin(9600);
-```
-To print the result in the console use in the loop() function:
-```
-Serial.println(brightness);
-```
-Change the delay to 50 ms between each loop.
-
-When your code finally works:
-* Save your changes
-* Commit:
-```
-git add .
-git commit -m "Your commit message"
-```
-* Push your changes:
-```
-git push
-```
-
 ## Adding sensors
 
 During this step, you will read the analog value of a sensor.
@@ -164,8 +121,38 @@ int sensorValue = analogRead(A0);
 Then we will convert this value in voltage (from 0 to 3.3V) and percentage:
 
 ```
-float voltage = sensorValue * (3.3 / 1023.0);
 float percentage = map(sensorValue, 0, 1023, 0, 100);
+```
+
+Copy past the following code into Arduino IDE and upload it to your board:
+```
+/*
+ * Author: Louis Moreau: https://github.com/luisomoreau
+ * Date: 2017/03/03
+ * Description:
+ * Read analog values from a sensor and display it on a console
+*/
+
+// the setup function runs once when you press reset or power the board
+void setup() {
+   Serial.begin(9600);
+}
+
+// the loop function runs over and over again forever
+void loop() {
+
+  int sensorValue = analogRead(A0);
+  Serial.print("light: ");
+  Serial.println(sensorValue);
+
+  int percentage = map(sensorValue, 0, 1023, 0, 100);
+
+  Serial.print("light percentage: ");
+  Serial.print(percentage);
+  Serial.println(" % ");
+
+  delay(1000);
+}
 ```
 
 Now print your results in the console.
