@@ -172,9 +172,6 @@ Once your code works, commit your changes and push them to your Github repositor
 
 **Be carefull, use 3.3V to power the Wisol module and not the 5V, otherwise, you may damage the module!!!**
 
-![Wiring](screenshots/connexion_gpio.png)
-Thanks [framboise314](http://www.framboise314.fr/carte-de-prototypage-sigfox-par-snoc/) for this connection schematics!
-
 Arduino UNO:
 
 - Plug the RX from the Wisol module to the pin 11 (we will define it as TX in our code).
