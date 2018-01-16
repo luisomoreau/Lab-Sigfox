@@ -22,6 +22,7 @@ The different steps will be:
 * Understand Sigfox Geolocation service
 
 ## Prerequisites
+(optional, if you don't have a Github account you can go directly to step 1)
 
 **I assume that you all have a Github account and git installed locally.**
 
