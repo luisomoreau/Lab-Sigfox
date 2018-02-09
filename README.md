@@ -495,14 +495,22 @@ You should get this result:
 
 ## See your messages in Sigfox Backend
 
+![backend device list](screenshots/backend-device-list.png)
+
 Now go to [Sigfox Backend](https://backend.sigfox.com) and login with the credentials you've been given.
 Click on the device menu and select your device.
-Now click on message, you should see the "coffee" message:
 
-![Sigfox Backend](screenshots/SigfoxBackend.png)
+![device info](screenshots/backend-device-info.png)
+
+Now click on message, you should see your message:
+
+![Sigfox Backend](screenshots/backend-device-messages.png)
 
 Cool right?
-Okay, but I need to use this message now.
+Okay, but what can I do with this message?
+
+The next step will be to deploy an open source platform to see and use this Sigfox messages.
+
 
 ## Sigfox Platform
 
