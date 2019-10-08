@@ -24,6 +24,7 @@ Data visualisation platform (Part 2):
 * Deploy your own data visualisation platform
 * Set a callback to push your data to an external service
 * Understand Sigfox Geolocation service
+* Parse your payload
 * Visualise your data
 
 Notation will be based on the following criteria:
@@ -549,7 +550,7 @@ Compile and upload the code:
 
 ![connected-plant-console](screenshots/connected-plant-console.png)
 
-Go back on the platform and add a perser to decode the Sigfox Payload:
+Go back on the platform and add a parser to decode the Sigfox Payload:
 
 ![add-parser](screenshots/add-parser.png)
 
