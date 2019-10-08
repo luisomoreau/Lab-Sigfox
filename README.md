@@ -1,28 +1,73 @@
-# Lab Sigfox
-
-Lab Sigfox using the BKRWS01 and Arduino boards
+# Lab Sigfox - version 2019
 
 ## About this Classroom
 
-The goal of this laboratory is to understand how to get started with Sigfox.
+The goal of this laboratory is to understand how to get started with the IoT (Internet of Things) network called Sigfox.
 For this lab, we will be using Arduino boards (Arduino Uno and MKR1000 + a Sigfox Module BKRWS01)
 
 
 This lab has been done for Github Classroom. To enter in the classroom, you should have received the link to get the invitation.
 
+
 The different steps will be:
-* Install Arduino IDE and the dependencies
+
+Arduino (Part 1):
+
+* Use the online Arduino tools (https://create.arduino.cc)
+* ~~Install Arduino IDE and the dependencies~~ (only if the online Arduino tool is not working)
 * Understand Arduino basics
 * First program
-* Adding sensors
+* Read sensors values
 * Send and receive your first "Hello World"
 * Send some sensors data
+
+Data visualisation platform (Part 2):
+* Deploy your own data visualisation platform
 * Set a callback to push your data to an external service
-* Visualize your data using an open source app
+* Visualise your data
 * Understand Sigfox Geolocation service
 
+Notation will be based on the following criteria:
+
+Arduino - Part 1:
+
+| Step                | Weight        | Comments  |
+| ------------------- |:-------------:| ---------:|
+| First Program       | 5%            |           |
+| Read sensors values | 10%           |           |
+| Send sigfox message | 10%           |           |
+| Send sensor data    | 10%           |           |
+|Total| 35%| |
+
+Data visualisation -  Part 2:
+
+| Step                | Weight        | Comments  |
+| ------------------- |:-------------:| ---------:|
+| Deploy application  | 20%           |           |
+| Set a callback      | 10%           |           |
+| Create a dashboard  | 10%            |           |
+| Geolocation         | 10%            |           |
+|Total| 50%| |
+
+Use of git : 15%
+
+After each step, please add some files (screenshots, pictures, code) under the ~/Lab-Report/ directory.
+
+Do not bother to create a nice lab report using word. I don't want you to spend time on the report.
+
+Once your files (screenshots, pictures, code) have been added, add them to your github project.
+
+Reminder:
+To use Git, you should :
+- clone your repository locally (using ```git clone```)
+- add any changes or new files (using ```git add```)
+- commit your changes (using ```git commit```)
+- push your changes (using ```git push```)
+
+
+
+
 ## Prerequisites
-(optional, if you don't have a Github account you can go directly to step 1)
 
 **I assume that you all have a Github account and git installed locally.**
 
@@ -32,7 +77,8 @@ Authorize the application to access to your Github account:
 
 ![Create Team](screenshots/GithubClassroom4.png)
 
-Create or join a team, name the team with your two names (or have fun).
+Create or join a team.
+Name your team with your two names.
 
 ![Create Team](screenshots/GithubClassroom1.png)
 ![Create Team](screenshots/GithubClassroom3.png)
@@ -512,14 +558,10 @@ Okay, but what can I do with this message?
 The next step will be to deploy an open source platform to see and use this Sigfox messages.
 
 
-## Sigfox Platform
+## Data visualisation Platform (Part 2)
 
 
-### Option 1: Test with the demo application
-
-[Demo](https://sigfox-platform.thenorthweb.com)
-
-### Option 2: Deploy your own instance with [Heroku](https://heroku.com)
+### Deploy your own instance with [Heroku](https://heroku.com)
 
 Deploy an instance on your Heroku account to play around with it!
 
