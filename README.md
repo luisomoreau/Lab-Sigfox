@@ -14,7 +14,6 @@ The different steps will be:
 Arduino (Part 1):
 
 * Use the online Arduino tools (https://create.arduino.cc)
-* ~~Install Arduino IDE and the dependencies~~ (only if the online Arduino tool is not working)
 * Understand Arduino basics
 * First program
 * Read sensors values
@@ -85,19 +84,28 @@ Name your team with your two names.
 
 ![Create Team](screenshots/GithubClassroom2.png)
 
-## Step 1: Install Arduino IDE and the dependencies
+## Step 1: Create an Arduino Create account
 
-Go to https://www.arduino.cc/en/main/software and download the Arduino IDE:
-![Arduino IDE](screenshots/Install-Arduino-IDE.png)
+Go to https://create.arduino.cc and create an account:
 
-If you are using a MKR1000 board, do the following step, otherwise go directly to step 2.
+![Arduino Create Gif](screenshots/arduino-create.gif)
 
-Go to Tools -> Boards -> Boards Manager
+Then, add the plugin to Chrome or Mozilla (here is for MacOs but if you're on Windows or Linux, just follow the steps):
 
-**MKR Boards**
+![Arduino Create plugin](screenshots/arduino-create-plugin.gif)
 
-Search for Arduino/Genuino&MKR1000
-![Install MKR](screenshots/Install-MKR-Boards.png)
+
+![arduino-create-plugin-installed](screenshots/arduino-create-plugin-installed.png)
+
+Finally, choose the MKR1000 board:
+
+![arduino-create-select-board](screenshots/arduino-create-select-board.png)
+
+![arduino-create-select-board-2](screenshots/arduino-create-select-board-2.png)
+
+![arduino-create-select-board-2](screenshots/arduino-create-select-board-connected.png)
+
+
 
 ## Step 2: Understand Arduino basics
 
