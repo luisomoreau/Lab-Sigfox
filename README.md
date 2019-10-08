@@ -103,6 +103,8 @@ Finally, choose the MKR1000 board:
 
 ![arduino-create-select-board-2](screenshots/arduino-create-select-board-2.png)
 
+Now, plug the Arduino board, the port should appear automatically:
+
 ![arduino-create-select-board-2](screenshots/arduino-create-select-board-connected.png)
 
 
@@ -123,9 +125,8 @@ If you need to understand more the Arduino syntax, please visit https://www.ardu
 
 ## First Program
 
-Open the Workspace/Blink/Blink.ino file with Arduino IDE
+Let's have a look at the following program :
 
-You should see the following program:
 ```
 // the setup function runs once when you press reset or power the board
 void setup() {
@@ -142,16 +143,21 @@ void loop() {
 }
 ```
 We will try to run this program:
-* Go to "Tools"
-* Select your Board (Arduino/Genuino MKR1000 or Arduino/Genuino Uno)
-* Select the Port
+* First verify your program by clicking on the "✓" button:
 
-![Arduino Tools](screenshots/Arduino-Tools.png)
+![FirstProgram-verify](screenshots/FirstProgram-verify.png)
 
-* Compile the code by clicking on the "check" icon
-* Run the code by clicking on the "right arrow" icon
+* Then, upload the program to the board by clicking on the "➔" button:
 
-You now should see the small led switching on and off every second!
+![FirstProgram-upload](screenshots/FirstProgram-upload.png)
+
+
+You now should see the small led switching on and off every second:
+
+![mkr1000-led](screenshots/mkr1000-led.png)
+
+Try to modify the delay value to make the led blink every 200 milliseconds.
+Once done, add your code to the ~/Lab-Report/FirstProgram folder or a screenshots of it and commit your changes.
 
 ## Adding sensors
 
